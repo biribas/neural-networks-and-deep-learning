@@ -39,13 +39,11 @@ class Network:
         self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
         self.weights = [np.random.randn(y, x) for x, y in zip(sizes[:-1], sizes[1:])]
 
-
     def feedforward(self, a: np.ndarray) -> np.ndarray:
         """Return the output of the network if `a` is input."""
         for b, w in zip(self.biases, self.weights):
             a = sigmoid(w @ a + b)
         return a
-
 
     def SGD(
         self,
@@ -99,7 +97,6 @@ class Network:
             else:
                 print(f"Epoch {j} complete")
 
-
     def apply_mini_batch_update(
         self,
         mini_batch: list[TrainingSample],
@@ -144,7 +141,6 @@ class Network:
         for i in range(self.num_layers - 1):
             self.biases[i] -= learning_rate * bias_grad[i]
             self.weights[i] -= learning_rate * weight_grad[i]
-
 
     def backprop(self, X: np.ndarray, Y: np.ndarray) -> tuple[list, list]:
         """
@@ -206,7 +202,6 @@ class Network:
 
         return bias_grad, weight_grad
 
-
     def evaluate(self, test_data):
         """Return the number of test inputs for which the neural
         network outputs the correct result. Note that the neural
@@ -214,7 +209,6 @@ class Network:
         neuron in the final layer has the highest activation."""
         test_results = [(np.argmax(self.feedforward(x)), y) for (x, y) in test_data]
         return sum(int(x == y) for (x, y) in test_results)
-
 
     def cost_derivative(self, output_activations: np.ndarray, y: np.ndarray) -> np.ndarray:
         return (output_activations - y)
