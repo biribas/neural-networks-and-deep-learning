@@ -1,6 +1,5 @@
 """
 mnist_loader
-~~~~~~~~~~~~
 
 A library to load the MNIST image data. For details of the data
 structures that are returned, see the docstrings for ``load_data``
@@ -8,13 +7,10 @@ and ``load_data_wrapper``. In practice, ``load_data_wrapper`` is the
 function usually called by our neural network code.
 """
 
-#### Libraries
-# Standard library
 import pickle
 import gzip
-
-# Third-party libraries
 import numpy as np
+from utils import vectorized_result
 
 TrainingSample = tuple[np.ndarray, np.ndarray]
 EvalSample = tuple[np.ndarray, np.int64]
@@ -43,12 +39,3 @@ def load_data() -> tuple[
     test_set = list(zip(test_inputs, test_data[1]))
 
     return training_set, validation_set, test_set
-
-def vectorized_result(j: int) -> np.ndarray:
-    """
-    Return a 10-dimensional unit vector with a
-    1.0 in the jth position and zeroes elsewhere.
-    """
-    e = np.zeros((10, 1))
-    e[j] = 1.0
-    return e

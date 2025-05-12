@@ -19,6 +19,7 @@ Adapted for educational purposes.
 
 import numpy as np
 import random
+from utils import sigmoid, sigmoid_prime
 from typing import Optional
 from mnist_loader import TrainingSample, EvalSample
 
@@ -202,22 +203,15 @@ class Network:
 
         return bias_grad, weight_grad
 
-    def evaluate(self, test_data):
-        """Return the number of test inputs for which the neural
+    def evaluate(self, test_data: list[EvalSample]) -> int:
+        """
+        Return the number of test inputs for which the neural
         network outputs the correct result. Note that the neural
         network's output is assumed to be the index of whichever
-        neuron in the final layer has the highest activation."""
+        neuron in the final layer has the highest activation.
+        """
         test_results = [(np.argmax(self.feedforward(x)), y) for (x, y) in test_data]
         return sum(int(x == y) for (x, y) in test_results)
 
     def cost_derivative(self, output_activations: np.ndarray, y: np.ndarray) -> np.ndarray:
         return (output_activations - y)
-
-
-def sigmoid(z: np.ndarray) -> np.ndarray:
-    """Apply the sigmoid function elementwise."""
-    return 1.0 / (1.0 + np.exp(-z))
-
-def sigmoid_prime(z: np.ndarray) -> np.ndarray:
-    """Apply the derivative of the sigmoid function elementwise."""
-    return sigmoid(z) * (1 - sigmoid(z))
