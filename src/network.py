@@ -137,10 +137,10 @@ class Network:
                     weight_grad[i] += delta_weight_grad[i]
 
         # Scaling (averaging)
-        learning_rate = eta / len(mini_batch)
+        k = eta / len(mini_batch)
         for i in range(self.num_layers - 1):
-            self.biases[i] -= learning_rate * bias_grad[i]
-            self.weights[i] -= learning_rate * weight_grad[i]
+            self.biases[i] -= k * bias_grad[i]
+            self.weights[i] -= k * weight_grad[i]
 
     def backprop(self, X: np.ndarray, Y: np.ndarray) -> tuple[list, list]:
         """
