@@ -1,6 +1,6 @@
 import numpy as np
 
-def vectorized_result(j: int) -> np.ndarray:
+def vectorized_result(j: np.int64) -> np.ndarray:
     """
     Return a 10-dimensional unit vector with a 1.0 in the j'th position
     and zeroes elsewhere.  This is used to convert a digit (0...9)
