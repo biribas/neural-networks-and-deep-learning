@@ -94,7 +94,9 @@ class Network:
                 self.apply_mini_batch_update(mini_batch, eta)
 
             if test_data:
-                print(f"Epoch {j}: {self.evaluate(test_data)} / {len(test_data)}")
+                accuracy = self.evaluate(test_data)
+                n_test = len(test_data)
+                print(f"Epoch {j}: {accuracy} / {n_test} ({(100 * accuracy / n_test):.2f}%)")
             else:
                 print(f"Epoch {j} complete")
 
