@@ -17,7 +17,7 @@ import gzip
 import numpy as np
 
 TrainingSample = tuple[np.ndarray, np.ndarray]
-EvalSample = tuple[np.ndarray, int]
+EvalSample = tuple[np.ndarray, np.int64]
 
 def load_data() -> tuple[
     list[TrainingSample],
